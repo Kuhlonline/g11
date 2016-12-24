@@ -7,16 +7,20 @@
         public $name;
 
         protected $extension;
+        protected $startArg;
 
         private $folder;
         private $ready;
         private $path;
         private $exists;
 
-        public function __construct(string $extensionName) {
+        public function __construct(string $extensionName, $startParam = null) {
             $this->folder   = "./extensions";
             $this->name     = $extensionName;
-            $this->path     = "{$this->folder}/{$this->name}.ext.php";
+            $this->startArg = $startParam;
+
+            $fName          = str_replace("\\", "/", $this->name);
+            $this->path     = "{$this->folder}/{$fName}.ext.php";
 
             if ($this->extensionExists() == false) return;
 
@@ -77,7 +81,7 @@
             $extName            = "\\extension\\{$this->name}";
 
             try {
-                $this->extension    = new $extName();
+                $this->extension    = new $extName($this->startArg);
                 return true;
             } catch (Exception $e) {
                 return false;

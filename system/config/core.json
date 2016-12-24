@@ -4,9 +4,7 @@
         "description": "Codename: Argon",
         "version": "0.0.1",
         "apiVersion": "1.0.0",
-        "shell_CLIVersion": "0.0.1",
-        "shell_JobVersion": "0.0.1",
-        "shell_SRVVersion": "0.0.1"
+        "shellVersion": "0.0.1"
     },
     "database": {
         "host": "127.0.0.1",
