@@ -8,9 +8,11 @@
         
         protected $connection;
 
-        public function __construct(string $tableName, $connection) {
+        public function __construct(string $tableName, $connection = null) {
+            global $dataController;
+
             $this->name         = $tableName;
-            $this->connection   = $connection;
+            $this->connection   = $connection ?? $dataController->connection();
 
             return;
         }

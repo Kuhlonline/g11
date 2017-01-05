@@ -3,20 +3,30 @@
     //Run in Shell Namespace to avoid class exposure
     namespace shell;
 
+
+    //Global Switches
+    global $is_api_request;
+    global $is_shell_request;
+    global $is_server;
+    $is_api_request                 = false;
+    $is_shell_request               = true;
+    $is_server                      = false;
+
+
     //Bootstrap the shell
     $shellExt               = initShell();
+    raise('shell_loaded');
 
     //Build Extension Name
     $extName                = "\\extension\shell\\" . $shellExt['extension'] ?? null;
-
-    //Exit if no valid extension passed
-    if (!$extName) exit("Unknown Extension: {$extName}\n");
     
     //Create Extension Factory
-    $factory                = new \core\extension('shell\\server');
+    $factory                = new \core\extension($extName);
 
     //Get Extension Object
     $extension              = $factory->object();
+    raise('extension_loaded', array($extName, $extension));
+
 
 
     //Functions
@@ -33,6 +43,7 @@
             exit(true);
         }
 
+        raise('bootstrap_loaded');
         return true;
     }
 
@@ -44,7 +55,7 @@
         $version    = $config->application->shellVersion;
         $name       = $config->application->title;
 
-        print "\n{$name}\nversion {$version}\n\n";
+        print "\n{$name}\nversion {$version}\n";
         return initExtension();
     }
 
@@ -59,6 +70,8 @@
             unset($param[1]);
             $param          = array_values(array_filter($param));
         }
+
+        print "{$shellExtension} Mode\n\n";
 
         return [
             'extension'     => $shellExtension,

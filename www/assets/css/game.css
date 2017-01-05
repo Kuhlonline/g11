@@ -1,0 +1,184 @@
+/** World Frame **/
+    .grid {
+        position:fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        margin: 0px;
+        padding: 10px;
+
+        background-color:#000;
+    }
+
+    table.world-table {
+        position:fixed;
+        width: 50%;        
+        left: 10%;
+        right: 10%;
+        top: 5%;
+        margin: auto;
+
+        background-color:#666;
+    }
+
+    table>tbody>tr>td {
+        position:relative;
+        text-align: center;
+        vertical-align: middle;
+        border: solid 0px rgba(0,0,0,0.01);
+        height:128px;
+        width:128px;
+        padding: 0px;
+
+        background-color:#444;
+    }
+
+
+/** Tiles **/
+    .rock-color {
+        background-color: rgba(100,100,100,0.5);
+    }
+
+    .sand-color {
+        background-color: rgba(75,75,20,0.5);
+    }
+
+    .dirt-color {
+        background-color: rgba(70,50,0,0.5);
+    }
+
+    .water-color {
+        background-color: rgba(0,50,100,0.5);
+    }
+
+    .layer.rock {
+        background-image: url('../img/rock.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+
+        filter: grayscale(80%);
+        -webkit-filter: grayscale(80%);
+    }
+
+    .layer.sand {
+        background-image: url('../img/sand.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+
+        filter: grayscale(80%);
+        -webkit-filter: grayscale(80%);
+    }
+
+    .layer.dirt {
+        background-image: url('../img/dirt.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+
+        filter: grayscale(80%);
+        -webkit-filter: grayscale(80%);
+    }
+
+    .layer.water {
+        background-image: url('../img/water.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+
+        filter: grayscale(80%);
+        -webkit-filter: grayscale(80%);
+    }
+
+    .layer.weather.clouds {
+        background-image: url('../img/clouds.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+
+        filter: grayscale(100%) blur(5px) brightness(50%) contrast(200%);
+        -webkit-filter: grayscale(90%) blur(5px) brightness(50%) contrast(200%);
+        opacity: 0.5;
+    }
+
+    .layer.light.night {
+        background-color: #000;
+        opacity: 0.3;
+    }
+
+    .layer.light.morning {
+        background-color: #fa8;
+        opacity: 0.3;
+    }
+
+    .layer.light.day {
+        background-color: #efd;
+        opacity: 0.3;
+    }
+
+    .layer.light.evening {
+        background-color: #a7a;
+        opacity: 0.3;
+    }
+
+    .layer {
+        position: absolute;     
+        display:block;   
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .layer1 {
+        z-index: 100;
+    }
+
+    .layer2 {
+        z-index: 200;
+    }
+
+    .layer3 {
+        z-index: 300;
+    }
+
+    .layer4 {
+        z-index: 400;
+    }
+
+    .layer5 {
+        z-index: 500;
+    }
+
+    .layer6 {
+        z-index: 600;
+    }
+
+    .layer7 {
+        z-index: 700;
+    }
+
+    .layer8 {
+        z-index: 800;
+    }
+
+    .layer9 {
+        z-index: 900;
+    }
+
+    .layer10 {
+        z-index: 1000;
+    }
+
+    .layer11 {
+        z-index: 1100;
+    }

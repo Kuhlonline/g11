@@ -5,6 +5,8 @@
 
     class mysql {
 
+        public $name;
+
         protected $connection;
         protected $connected        = false;
 
@@ -12,7 +14,7 @@
 
         }
 
-        public function connect(string $host, string $schema, string $username = '', string $password = '', $port = 3306) {
+        public function connect(string $host, string $username = '', string $password = '', string $schema, $port = 3306) {
 
             $this->connection   = new mysqli($host, $username, $password, $schema, $port);
             $this->connected    = true;
@@ -30,6 +32,10 @@
 
         public function connected() : bool {
             return $this->connected;
+        }
+
+        public function setTable(string $name) {
+            $this->name     = $name;
         }
 
         public function insert(array $record) : int {

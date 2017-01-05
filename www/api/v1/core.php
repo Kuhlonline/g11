@@ -100,7 +100,7 @@
         try {
             $return         = call_user_func_array(
                 [$targetObject, $request->function], 
-                $request->param
+                [$request->param]
             );
         } catch (Exception $e) {
             $returnCode     = 500;

@@ -35,17 +35,16 @@
 
         protected function writeLine(string $msg) {
 
-            $ip         = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
             $item       = [
                 date("Y-m-d"),
                 date("H:i:s"),
-                $_SERVER['HTTP_HOST'],
-                $ip,
+                ($_SERVER['HTTP_HOST'] ?? 'localhost'),
+                ($_SERVER['REMOTE_ADDR'] ?? '0.0.0.0'),
                 implode(";", $_REQUEST),
-                $msg
+                "{$msg}\n"
             ];
 
-            return file_put_contents($this->path, $item, FILE_APPEND);
+            return file_put_contents($this->path, implode(",", $item), FILE_APPEND);
         }
 
         protected function create() {

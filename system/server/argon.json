@@ -1,0 +1,29 @@
+{
+    "server": {
+        "rate":     1000000
+    },
+    "world": {
+        "size":     256,
+        "tick":     60,
+        "generator": {
+            "tiles": {
+                "rock": 5,
+                "sand": 2,
+                "dirt": 2,
+                "water": 1
+            }
+        },
+        "automatic_events": {
+            "rain": {
+                "name":     "rain",
+                "handler":  "\\game\\engine\\weather",
+                "routine":  "rain",
+                "chance":   0.02,
+                "min_duration_hours": 1,
+                "max_duration_hours": 18,
+                "min_diameter": 8,
+                "max_diameter": 100
+            }
+        }
+    }
+}

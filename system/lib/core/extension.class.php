@@ -15,7 +15,7 @@
         private $exists;
 
         public function __construct(string $extensionName, $startParam = null) {
-            $this->folder   = "./extensions";
+            $this->folder   = "./";
             $this->name     = $extensionName;
             $this->startArg = $startParam;
 
@@ -78,7 +78,7 @@
         }
 
         protected function createExtension() : bool {
-            $extName            = "\\extension\\{$this->name}";
+            $extName            = "{$this->name}";
 
             try {
                 $this->extension    = new $extName($this->startArg);
