@@ -18,7 +18,7 @@
     raise('shell_loaded');
 
     //Build Extension Name
-    $extName                = "\\extension\shell\\" . $shellExt['extension'] ?? null;
+    $extName                = "\\extension\\shell\\" . $shellExt['extension'] ?? null;
     
     //Create Extension Factory
     $factory                = new \core\extension($extName);
@@ -63,7 +63,7 @@
         $shellExtension     = $_SERVER['argv'][1] ?? null;
 
         if (!$shellExtension) {
-            exit(help());
+            exit("Expecting Extension\n");
         } else {
             $param          = $_SERVER['argv'];
             unset($param[0]);

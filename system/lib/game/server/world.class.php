@@ -304,7 +304,7 @@
                     'ampm'          => $ampm
                 ]);
 
-                file_put_contents("./server/tod", $pack);
+                file_put_contents("./server/runtime/tod", $pack);
             }
 
 
@@ -326,6 +326,25 @@
 
                 //Produce timed events
                 $this->generate_timed_events();
+            }
+
+
+        /** CLI Functions **/
+
+            //Hello World
+            public function cli_hello() {
+                $load   = explode("load ", `uptime`, 2);
+                $avg    = trim(str_replace("average:", null, $load[1]));
+                $parts  = explode(", ", $load[0]);
+                $time   = explode(' ', trim($parts[0]) .' '. trim($parts[1]), 2);
+
+                return 
+                    "Hello!\n\n".
+                    str_pad("Game World time: ", 40) . "{$this->days} Days {$this->time}\n".
+                    str_pad("Load average: ", 40) . "{$avg}\n".
+                    str_pad("Server time: ", 40) . "{$time[0]}\n".
+                    str_pad("Uptime: ", 40) . "{$time[1]}\n"
+                ;
             }
             
     }

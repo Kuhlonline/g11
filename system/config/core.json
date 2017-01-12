@@ -4,7 +4,7 @@
         "description": "Codename: Argon",
         "version": "0.0.1",
         "apiVersion": "1.0.0",
-        "shellVersion": "0.0.1"
+        "shellVersion": "0.2.1"
     },
     "database": {
         "host": "127.0.0.1",

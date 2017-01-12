@@ -3,7 +3,7 @@
         "rate":     1000000
     },
     "world": {
-        "size":     12,
+        "size":     128,
         "tick":     60,
         "generator": {
             "tiles": {

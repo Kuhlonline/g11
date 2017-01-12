@@ -43,7 +43,8 @@
             return $this->init();
         }
 
-        public function stop() {
+        public function stop(string $reason) {
+            $this->console("Stopping Server. User provided reason: {$reason}");
             $this->running      = false;
             $this->stopTime     = microtime(true);
             $this->runTime      = ($this->stopTime - $this->startTime);
@@ -71,6 +72,7 @@
             global $config;
 
             //Server Bootscript
+            $this->console("Booting Server...");
             $bootScript     = include("./server/bin/boot.php");
             
 
@@ -109,7 +111,7 @@
 
 
                 //Raise the Server Tick Event
-                raise('server_tick');
+                raise('server_tick', ['extension'=>$this]);
             }
 
             $this->console("Server Stopped");
