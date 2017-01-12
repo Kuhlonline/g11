@@ -18,6 +18,18 @@
 
         /** API **/
 
+
+            //time of day
+            public function api_time_of_day($param = array()) {
+                $json           = file_get_contents("./server/runtime/tod");
+                if (!$json)     return false;
+
+                $data           = json_decode($json, true);
+                if (!$data)     return false;
+
+                return $data;
+            }
+
             //View
             public function api_view($param = array()) {
 

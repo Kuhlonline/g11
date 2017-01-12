@@ -19,7 +19,7 @@
 
 
             //set config reference
-            $this->config       = new \data\json("./server/argon.json");
+            $this->config       = new \data\json("./server/bin/argon.json");
 
 
             //Make Sure gameObjects is readys to hold objects

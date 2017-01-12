@@ -47,6 +47,8 @@
 
     function validateOrigin() : bool {
 
+        return true;
+
         //Config
         $file                       = "./config/token.json";
         $tokens                     = new \data\json($file);

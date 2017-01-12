@@ -10,7 +10,7 @@
         public function __construct(\extension\shell\server $server) {
 
             //Game Server Config
-            $this->config   = new \data\json('./server/argon.json');
+            $this->config   = new \data\json('./server/bin/argon.json');
             $this->rate     = $this->config->server->rate;
 
 
@@ -19,19 +19,19 @@
             $this->server->restTime($this->rate);
 
 
-            //Hook Tick Event
+            //Hook Private/Self Tick Event
             hook('server_tick', function() {
                 $this->tick();
             });
 
 
             //Create create_world_instance
-            $this->create_world_instance();
+             $this->world    = $this->create_world_instance();
 
 
             //Hook Tick Event to world
             hook('server_tick', function() {
-                $this->world->event_tick();
+                $this->world->handleEventTick();
             });
 
 
@@ -43,8 +43,8 @@
             $this->server->console("World Time: {$this->world->days} Days {$this->world->time}");
         }
 
-        protected function create_world_instance() {
-            $this->world    = new \game\server\world($this->config->world, $this->server);
+        protected function create_world_instance() : \game\server\world {
+           return new \game\server\world($this->config->world, $this->server);
         }
 
     }

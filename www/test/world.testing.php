@@ -39,12 +39,14 @@
 
 
         <div class="grid">
+            <span class="tod"></span>
+            <br>
             X <input id="x" value="5">
             <br>
             Y <input id="y" value="5">
             <br>
             
-            <table class="world-table">
+            <table class="world-table map-base">
                 <tbody>
                     <tr>
                         <td class="i1 x1 y1">
@@ -410,6 +412,26 @@
             </table>
 
             <button type="button" class="btn btn-primary" onclick="test_world_location_load()">Test</button>
+
+            <div>
+            <strong>Light</strong>
+            <ul class="nav">
+                <li><a onclick="mask('light', 'morning');">Morning</a></li>
+                <li><a onclick="mask('light', 'day');">Day</a></li>
+                <li><a onclick="mask('light', 'evening');">Evening</a></li>
+                <li><a onclick="mask('light', 'night');">Night</a></li>
+                <li><a onclick="mask('light', '');">None</a></li>
+            </ul>
+            </div>
+
+            
+            <div>
+            <strong>Weather</strong>
+            <ul class="nav">
+                <li><a onclick="mask('weather', 'clouds');">Rain Clouds</a></li>
+                <li><a onclick="mask('weather', '');">None</a></li>
+            </ul>
+            </div>
         </div>
 
          <!-- JQuery 2.2.4 -->
@@ -444,6 +466,13 @@
                 ;
             }
 
+
+            function tod() {
+                api.invoke("\\game\\world", "time_of_day", {}, function(result) {
+                    $('.tod').html(result.response.date_time);
+                });
+            }
+
             function test_world_location_load() {
                 api.endpoint    = "../api/v1/";
 
@@ -472,29 +501,25 @@
                             $layers[i]   = $(targetTile + ">span.layer" + i);
                         }
 
-                        //Find mode
-                        /*
-                        tile.mode       = 'rock';
-                        var hv          = 0;
-                        var items       = ['rock', 'sand', 'dirt', 'water'];
-
-                        for (var i in items) {
-                            var m = items[i];
-                            var v = parseInt(tile[m]);
-
-                            if (v > hv) tile.mode = m;
-                        }*/
-
                         //Set Layer Classes
 
                             //Base Color
                             $layers[0].addClass(tile.mode + '-color');
 
                             //Materials
-                            $layers[1].css('opacity', 1).addClass('rock').css('opacity', parseInt(tile.rock) / 15);
-                            $layers[2].css('opacity', 1).addClass('sand').css('opacity', parseInt(tile.sand) / 15);
-                            $layers[3].css('opacity', 1).addClass('dirt').css('opacity', parseInt(tile.dirt) / 15);
-                            $layers[4].css('opacity', 1).addClass('water').css('opacity', parseInt(tile.water) / 10);
+                            $layers[1]
+                                .css('opacity', 1)
+                                .removeClass('rock')
+                                .removeClass('sand')
+                                .removeClass('dirt')
+                                .removeClass('water')
+                                .addClass(tile.mode)
+                                .css('opacity', parseInt(tile[tile.mode]) / 10)
+                            ;
+
+                            /*$layers[2].css('opacity', 1).addClass('sand').css('opacity', parseInt(tile.sand) / 5);
+                            $layers[3].css('opacity', 1).addClass('dirt').css('opacity', parseInt(tile.dirt) / 5);
+                            $layers[4].css('opacity', 1).addClass('water').css('opacity', parseInt(tile.water) / 5);*/
 
 
                             //Content

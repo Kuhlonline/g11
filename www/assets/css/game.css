@@ -31,11 +31,26 @@
         width:128px;
         padding: 0px;
 
-        background-color:#444;
+        background-color:transparent;
     }
 
 
 /** Tiles **/
+
+    .map-base {
+        background-image: url('../img/map_base.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: scroll;
+        opacity: 0.5;
+    }
+
+    .layer {
+        transition: background-color 3s, background 3s, background-image 3s;
+        -webkit-transition: background-color 3s, background 3s, background-image 3s;
+    }
+
     .rock-color {
         background-color: rgba(100,100,100,0.5);
     }
@@ -49,7 +64,7 @@
     }
 
     .water-color {
-        background-color: rgba(0,50,100,0.5);
+        background-color: rgba(50,100,200,0.85);
     }
 
     .layer.rock {
@@ -59,8 +74,7 @@
         background-position: center center;
         background-attachment: scroll;
 
-        filter: grayscale(80%);
-        -webkit-filter: grayscale(80%);
+        
     }
 
     .layer.sand {
@@ -70,8 +84,7 @@
         background-position: center center;
         background-attachment: scroll;
 
-        filter: grayscale(80%);
-        -webkit-filter: grayscale(80%);
+        
     }
 
     .layer.dirt {
@@ -81,8 +94,7 @@
         background-position: center center;
         background-attachment: scroll;
 
-        filter: grayscale(80%);
-        -webkit-filter: grayscale(80%);
+        
     }
 
     .layer.water {
@@ -92,8 +104,7 @@
         background-position: center center;
         background-attachment: scroll;
 
-        filter: grayscale(80%);
-        -webkit-filter: grayscale(80%);
+        
     }
 
     .layer.weather.clouds {
@@ -110,7 +121,7 @@
 
     .layer.light.night {
         background-color: #000;
-        opacity: 0.3;
+        opacity: 0.6;
     }
 
     .layer.light.morning {
@@ -119,7 +130,7 @@
     }
 
     .layer.light.day {
-        background-color: #efd;
+        background-color: #eef;
         opacity: 0.3;
     }
 
@@ -139,24 +150,35 @@
         margin: 0px;
     }
 
+    .layer0 {
+        z-index: 10;
+    }
+
     .layer1 {
         z-index: 100;
     }
 
     .layer2 {
         z-index: 200;
+        display:none;
     }
 
     .layer3 {
         z-index: 300;
+        display:none;
     }
 
     .layer4 {
         z-index: 400;
+        display:none;
     }
 
     .layer5 {
         z-index: 500;
+        color: #fff;
+        font-size: 18px;
+        text-align:center;
+        opacity: 1;
     }
 
     .layer6 {

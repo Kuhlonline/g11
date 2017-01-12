@@ -4,7 +4,7 @@
 
     class server {
 
-        const PATH          = "./server/server.run";
+        const PATH          = "./server/runtime/server.run";
 
         protected $log              = null;
         protected $running          = false;
@@ -71,7 +71,7 @@
             global $config;
 
             //Server Bootscript
-            $bootScript     = include("./server/boot.php");
+            $bootScript     = include("./server/bin/boot.php");
             
 
             //Raise Start Event

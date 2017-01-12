@@ -1,0 +1,51 @@
+{
+    "server": {
+        "rate":     1000000
+    },
+    "world": {
+        "size":     12,
+        "tick":     60,
+        "generator": {
+            "tiles": {
+                "rock": 5,
+                "sand": 2,
+                "dirt": 2,
+                "water": 1
+            }
+        },
+        "random_events": {
+            "weather": {
+                "chance":       100,
+                "duration_min": 400,
+                "duration_max": 1800,
+                "controller":   "\\game\\engine\\weather",
+                "handler":      "weather",
+                "threaded":     true
+            }
+        },
+        "timed_events": {
+            "world_filter_vsnSmooth_v1": {
+                "start_time": "00:00:00",
+                "duration_secs": 1900,
+                "threaded":     false,
+                "controller":   "\\game\\engine\\vsnMap",
+                "handler":      "vsnSmooth_v1"
+            },
+            "world_light_cycle": {
+                "start_time": "06:00:00",
+                "duration_secs": 48650,
+                "threaded":     false,
+                "controller":   "\\game\\engine\\light",
+                "handler":      "sun"
+            },
+            "world_life_cycle": {
+                "start_time": "00:00:00",
+                "duration_secs": 86400,
+                "threaded":     false,
+                "controller":   "\\game\\engine\\life",
+                "handler":      "god"
+            }
+        },
+        "disabled_events": []
+    }
+}
