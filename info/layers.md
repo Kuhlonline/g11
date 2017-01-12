@@ -14,13 +14,3 @@ Layer | Terrain Types
 9 | **Weather**
 10 | **Heat**
 11 | **Light**
-
-# Terrain Types
-
-Name | Color
-   - | -
-Sand | #ffff00 
-Dirt | #444400
-Rock | #555555
-Water | #2288aa
-Grass | #00ff00
