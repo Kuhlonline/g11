@@ -29,9 +29,11 @@
                     continue;
                 }
 
-                $this->send("Sending request to server. Please Wait.");
+                //$this->send("Sending request to server. Please Wait.");
+                $this->send(str_repeat("-", 60));
                 $response   = $this->execute_command($cmd);
                 $this->send($response);
+                $this->send(str_repeat("-", 60));
 
             }
 
@@ -80,7 +82,11 @@
                 if ($i >= $timeout) {
                     $running = false;
                     $this->send("Done Waiting. Revoking request.");
-                    try {unlink($location);} catch (Exception $e) {}
+
+                    try {
+                        if (file_exists($location)) unlink($location);
+                    } catch (Exception $e) {}
+
                     continue;
                 }
 
@@ -88,7 +94,11 @@
                 if (!file_exists($rFile)) continue;
 
                 $resp   = trim(file_get_contents($rFile));
-                try {unlink($rFile);} catch (Exception $e) {}
+
+                try {
+                    if (file_exists($rFile)) unlink($rFile); 
+                } catch (Exception $e) {}
+                
 
                 if (!$resp) {
                     $running = false;

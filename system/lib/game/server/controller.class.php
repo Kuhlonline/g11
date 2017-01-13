@@ -102,14 +102,17 @@
                 case 'cli_server_shutdown':
                 case 'cli_server_quit':
                 case 'cli_shutdown_server':
-                    $extension->stop("CLI User requested shutdown");
+                    $extension->stop("RPC shutdown requested");
                     $stdOut     = "Server is shutting down";
                     return true;
                 break;
 
             }
 
-            if (!method_exists($this->world, $cmd)) {
+
+            $cliHandler     = new \game\server\cliHandler($this->world);
+
+            if (!method_exists($cliHandler, $cmd)) {
                 $cmdName    = str_replace("cli_", null, $cmd);
                 $stdOut     = "{$cmdName} Not available";
                 return false;
@@ -125,7 +128,7 @@
                 $param[$key]    = $val;
             }
 
-            $result     = call_user_func_array([$this->world, $cmd], $param);
+            $result     = call_user_func_array([$cliHandler, $cmd], $param);
 
             if ($result === false) {
                 $stdOut = "Error executing {$cmd}";

@@ -20,7 +20,17 @@
             $this->y    = $y;
             $coords     = "x" . str_pad($x, 3, 0, STR_PAD_LEFT) . " y" . str_pad($y, 3, 0, STR_PAD_LEFT);
 
-            if ($this->exists() == false) $this->create();
+            if ($this->exists() == false) {
+                
+                if ($this->create()) {
+                    $server->console("Created new location {$this->x}x{$this->y}");
+                } else {
+                    $server->console("Failed to create new location {$this->x}x{$this->y}");
+                }
+
+            } else {
+                $server->console("Loaded location {$this->x}x{$this->y}");
+            }
         }
 
         private function exists() : bool {

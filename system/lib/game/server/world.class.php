@@ -20,15 +20,6 @@
                 //Set Server (ByRef)
                 $this->server           = $server;
 
-                //Send Loading Message
-                $this->server->console("Loading World");
-
-                //Construct World
-                $this->buildWorld();
-
-                //Send Done Message
-                $this->server->console("World Loaded");
-
                 //Reset Time
                 //@todo Load time from ./server/tod
                 $this->time_second      = 0;
@@ -41,23 +32,76 @@
 
         /** World Generation **/
 
-            //Build World Map
-            protected function buildWorld() {
-                $totalLocs  = ($this->size * $this->size);
-
-                for ($y = 1; $y <= $this->size; $y++) {
-                    $perc   = number_format(($y / $this->size) * 100, 1);
-                    $locs   = floor($y * $this->size);
-
-                    for ($x = 1; $x <= $this->size; $x++) {
-                        $loc    = new \game\location($x, $y, $this->server);
-                        usleep(1);                        
-                    }
-
-                    $mb     = number_format((memory_get_usage(true) / 1024) / 1024, 2) . " MB";
-                    $this->server->console("Loaded {$locs}/{$totalLocs} Locations  | {$perc}% | {$mb}");
-                }
+            //Truncate the table and remove all locations
+            public function truncate() {
+                $sql        = "TRUNCATE `world`;";
+                $result     = $this->database->query($sql, true);
+                return;
             }
+
+
+            public function generateWorld() {
+
+                $ticks      = ($this->size * $this->size);
+
+                $handler    = function($param = array()) {
+                    
+                    $event  = $this->events[$param['id']];
+                    $size   = $param['size'];
+                    $i      = $event['iterations'];
+                    $d      = $event['duration'];
+
+                    $results    = $event['results'][$i] ?? [];
+
+                    if (!$results) {
+                        $curX   = 1;
+                        $curY   = 1;
+                    } else {
+                        $curX   = $results['last_x'] ?? -1;
+                        $curY   = $results['last_y'] ?? -1;
+
+                        if ($curY == -1 or $curX == -1) return;
+
+                        if ($curX < $size) {
+                            $curX++;
+                        } else {
+                            $curX = 1;
+                            $curY++;
+                        }
+
+                        if ($curY > $size) {
+                            $this->stopTimedEvent($param['id']);
+                            return "Completed {$param['name']}";
+                        }
+                    }
+                    
+                    $perc   = number_format(($i/$d) * 100, 1);
+                    $loc    = new \game\location($curX, $curY, $this->server);
+                    
+                    return [
+                        'last_x'    => $curX,
+                        'last_y'    => $curY
+                    ];
+                };
+
+                $payload    = [
+                    'name'  => $this->name,
+                    'size'  => $this->size
+                ];
+
+                $eventId    = $this->startTimedEvent(
+                    'generate_world', 
+                    $ticks,
+                    $handler,
+                    $payload,
+                    true
+                );
+
+                return "Started Event generate_world with Id #{$eventId}";
+            }
+
+
+
 
 
 
@@ -86,9 +130,7 @@
 
             //Stop a Server Event
             public function stopTimedEvent($id) {
-                if (!isset($this->events[$id])) return;
                 unset($this->events[$id]);
-                return;
             }
 
             //List running events by name
@@ -167,8 +209,9 @@
                         $event['iterations']    = ($i + 1);
                     }
 
-                    $func       = $event['handler'];
-                    $result     = $func($event['param']);
+                    $func                       = $event['handler'];
+                    $event['param']['id']       = $id;
+                    $result                     = $func($event['param']);
 
                     if ($event['cache']) {
                         $event['results'][$i+1] = $result;
@@ -328,24 +371,6 @@
                 $this->generate_timed_events();
             }
 
-
-        /** CLI Functions **/
-
-            //Hello World
-            public function cli_hello() {
-                $load   = explode("load ", `uptime`, 2);
-                $avg    = trim(str_replace("average:", null, $load[1]));
-                $parts  = explode(", ", $load[0]);
-                $time   = explode(' ', trim($parts[0]) .' '. trim($parts[1]), 2);
-
-                return 
-                    "Hello!\n\n".
-                    str_pad("Game World time: ", 40) . "{$this->days} Days {$this->time}\n".
-                    str_pad("Load average: ", 40) . "{$avg}\n".
-                    str_pad("Server time: ", 40) . "{$time[0]}\n".
-                    str_pad("Uptime: ", 40) . "{$time[1]}\n"
-                ;
-            }
             
     }
 

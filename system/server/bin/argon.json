@@ -1,16 +1,17 @@
 {
     "server": {
-        "rate":     1000000
+        "rate":     10
     },
     "world": {
-        "size":     128,
+        "name":     "VSN Argon",
+        "size":     256,
         "tick":     60,
         "generator": {
             "tiles": {
-                "rock": 5,
-                "sand": 2,
-                "dirt": 2,
-                "water": 1
+                "rock": 1,
+                "sand": 4,
+                "dirt": 3,
+                "water": 4
             }
         },
         "random_events": {
