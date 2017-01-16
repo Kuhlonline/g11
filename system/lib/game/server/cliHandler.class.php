@@ -36,6 +36,33 @@
                 ;
             }
 
+            //running events
+            public function cli_events() {
+
+                $buffer         = [];
+
+                foreach ($this->world->runningEvents() as $eventName => $eventList) {
+                    foreach ($eventList as $event) {
+                        $perc       = number_format(($event['iterations'] / $event['duration']) * 100, 2);
+
+                        $line       = 
+                            "{$eventName}\n".
+                            " - " . str_pad("ID:", 20)              . "{$event['id']}\n".
+                            " - " . str_pad("Started:", 20)         . date("m/d/Y g:i A", $event['start_time']) ."\n".
+                            " - " . str_pad("Progress:", 20)        . "{$perc}%\n".
+                            " - " . str_pad("Cache:", 20)           . (($event['cache']) ? 'Yes' : 'No') . "\n".
+                            " - " . str_pad("Cache Limit:", 20)     . ($event['cache_size'] ?? 0) . "\n".
+                            " - " . str_pad("Cached Results:", 20)  . count($event['results']) . "\n".
+                            " - " . str_pad("Steps per Cycle:", 20) . $event['step'] . "\n"
+                        ;
+
+                        $buffer[]   = $line;
+                    }
+                }
+
+                return implode("\n\n", $buffer);
+            }
+
 
             //Create World
             public function cli_generate_world() {

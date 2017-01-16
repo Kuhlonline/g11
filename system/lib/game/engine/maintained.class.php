@@ -7,11 +7,10 @@
         protected $database;
         protected $config;
 
-        public function __construct(string $name, $options = null, bool $register = false) {
+        public function __construct(string $name, $options = null) {
 
             //Ref Global Objects
             global $dataController;
-            global $gameObjects;
 
 
             //set database reference
@@ -22,20 +21,8 @@
             $this->config       = new \data\json("./server/bin/argon.json");
 
 
-            //Make Sure gameObjects is readys to hold objects
-            //if (!is_array($gameObjects)) $gameObjects = [];
-            //if (!isset($gameObjects[$name])) $gameObjects[$name] = [];
-
-
             //Construct Parent
             parent::__construct($name, $this->transform($options));
-
-
-            //Add to global catalog
-            //diabled due to memory issues with locations
-            //where each location is represented instead
-            //of a single object for all locations
-            //if ($register) $gameObjects[$name][] = $this;
         }
 
         protected function transform($object) {

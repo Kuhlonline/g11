@@ -44,6 +44,12 @@
             return print_r($this, true);
         }
 
+        public function objectArray($object) : array {
+            $json   = json_encode($object);
+            $arr    = json_decode($json, true);
+            return ($arr and is_array($arr)) ? $arr : [];
+        }
+
     }
 
 ?>

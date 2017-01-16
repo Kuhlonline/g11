@@ -94,7 +94,9 @@
                     $ticks,
                     $handler,
                     $payload,
-                    true
+                    true,
+                    12,                    
+                    4096
                 );
 
                 return "Started Event generate_world with Id #{$eventId}";
@@ -108,7 +110,7 @@
         /** Server Events **/
 
             //Create a Server Event
-            public function startTimedEvent(string $eventName, int $eventTicks = 0, callable $handler, array $param = array(), bool $eventCaching = false) {
+            public function startTimedEvent(string $eventName, int $eventTicks = 0, callable $handler, array $param = array(), bool $eventCaching = false, int $cacheSize = 0, int $step = 1) {
                 $id                 = uniqid();
                 $disabled           = $this->disabled_events;
                 if (in_array($eventName, $disabled)) return false;
@@ -122,7 +124,9 @@
                     'param'     => $param,
                     'handler'   => $handler,
                     'results'   => [],
-                    'cache'     => $eventCaching
+                    'cache'     => $eventCaching,
+                    'cache_size'=> $cacheSize,
+                    'step'      => $step
                 ];
 
                 return $id;
@@ -197,24 +201,40 @@
                 foreach ($this->events as $id => $event) {
                     $d      = $event['duration']    ?? false;
                     $i      = $event['iterations']  ?? 0;
-
-                    usleep(1);
+                    $step   = $event['step']        ?? 1;
 
                     if ($i == 0) $event['start_time'] = time();
                     if ($d == false) continue;
-                    if ($i >= $d) {
-                        $this->stopTimedEvent($id);
-                        continue;
-                    } else {
-                        $event['iterations']    = ($i + 1);
-                    }
 
-                    $func                       = $event['handler'];
-                    $event['param']['id']       = $id;
-                    $result                     = $func($event['param']);
+                    for ($s = 1; $s <= $step; $s++) {
 
-                    if ($event['cache']) {
-                        $event['results'][$i+1] = $result;
+                        //CPU Rest
+                        usleep(100);
+                        $i      = $event['iterations']  ?? 0;
+
+                        if ($i >= $d) {
+                            $this->stopTimedEvent($id);
+                            continue;
+                        } else {
+                            $event['iterations']    = ($i + 1);
+                        }
+
+                        $func                       = $event['handler'];
+                        $event['param']['id']       = $id;
+                        $result                     = $func($event['param']);
+
+                        if ($event['cache'] and $result) {
+                            $event['results'][$i+1] = $result;
+                        }
+
+                        if ($event['cache_size'] != 0) {
+                            if (count($event['results']) > $event['cache_size']) {
+                                $keys       = array_keys($event['results']);
+                                $firstKey   = $keys[0];
+                                unset($event['results'][$firstKey]);
+                            }
+                        }
+
                         $this->events[$id]      = $event;
                     }
 
@@ -359,16 +379,16 @@
             public function handleEventTick() {
 
                 //Calculate the server world time
-                $this->calc_server_time();
+                $this->calc_server_time();                
 
                 //Run registered world events
                 $this->serve_timed_events();
 
                 //Generate Random Events
-                $this->generate_random_events();
+                //$this->generate_random_events();
 
                 //Produce timed events
-                $this->generate_timed_events();
+                //$this->generate_timed_events();
             }
 
             
