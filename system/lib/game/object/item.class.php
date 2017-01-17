@@ -27,7 +27,8 @@
         }
 
         public function use(array $param = array()) : bool {
-
+            //string $targetClass, int $targetId, 
+            //are the parent
         }
 
     }

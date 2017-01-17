@@ -18,7 +18,7 @@
 
 
             //set config reference
-            $this->config       = new \data\json("./server/bin/argon.json");
+            $this->config       = new \data\json("./server/config/argon.json");
 
 
             //Construct Parent

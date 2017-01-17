@@ -1,0 +1,82 @@
+{
+    "fighter": {
+        "id":   "fighter",
+        "title":"Fighter",
+        "hp":   20,
+        "ap":   10,
+        "str":  10,
+        "end":  2,
+        "agi":  2,
+        "int":  1,
+        "skills": {
+            "healing": 0,
+            "magic": 0,
+            "ranged": 0,
+            "melee": 1
+        }
+    },
+    "white_mage": {
+        "id":   "white_mage",
+        "title":"White Mage",
+        "hp":   15,
+        "ap":   10,
+        "str":  1,
+        "end":  5,
+        "agi":  5,
+        "int":  9,
+        "skills": {
+            "healing": 2,
+            "magic": 2,
+            "ranged": 0,
+            "melee": 0
+        }
+    },
+    "black_mage": {
+        "id":   "black_mage",
+        "title":"Black Mage",
+        "hp":   10,
+        "ap":   15,
+        "str":  1,
+        "end":  2,
+        "agi":  2,
+        "int":  8,
+        "skills": {
+            "healing": 0,
+            "magic": 5,
+            "ranged": 0,
+            "melee": 0
+        }
+    },
+    "tank": {
+        "id":   "tank",
+        "title":"Tank",
+        "hp":   30,
+        "ap":   5,
+        "str":  2,
+        "end":  8,
+        "agi":  1,
+        "int":  1,
+        "skills": {
+            "healing": 1,
+            "magic": 0,
+            "ranged": 0,
+            "melee": 1
+        }
+    },
+    "ranger": {
+        "id":   "ranger",
+        "title":"Ranger",
+        "hp":   20,
+        "ap":   10,
+        "str":  3,
+        "end":  2,
+        "agi":  5,
+        "int":  2,
+        "skills": {
+            "healing": 1,
+            "magic": 0,
+            "ranged": 3,
+            "melee": 0
+        }
+    }
+}

@@ -10,7 +10,7 @@
         public function __construct(\extension\shell\server $server) {
 
             //Game Server Config
-            $this->config   = new \data\json('./server/bin/argon.json');
+            $this->config   = new \data\json('./server/config/argon.json');
             $this->rate     = $this->config->server->rate;
 
 
