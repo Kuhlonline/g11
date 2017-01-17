@@ -3,7 +3,7 @@
 The tick rate govern the world time speed. It can be found in the ./server/x.json file. Where (x) is the name of the release
 
 e.g.
-`./system/argon.json`
+`./system/config/argon.json`
 
 Contains:
 ```json
