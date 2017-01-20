@@ -33,8 +33,97 @@
     </head>
     <body>
 
+        <div class="content" id="page">
 
-         <!-- JQuery 2.2.4 -->
+            <audio loop>
+                <source src="./assets/audio/Nine Inch Nails - Gone, Still.mp3">
+            </audio>
+
+            <div class="container-fluid tight spaceless">
+                <div class="row-fluid">
+                    <div class="col-xs-12 tight spaceless hidden-xs" style="height:75px;">&nbsp;</div>
+                </div>
+            </div>
+
+            <div class="container-fluid tight spaceless">
+                <div class="row-fluid">
+                    <div class="col-sm-6 col-sm-offset-3 tight">
+                        
+                        <div class="jumbotron spaceless box">
+                            <h1 class="text-white text-center">
+                                <div class="spaced">
+                                    Argon
+                                    <small>
+                                        v0.1.0
+                                    </small>
+                                </div>
+                                <small>
+
+                                    <div class="signin" style="display:none;">
+                                        <br>
+                                        <div class="text-right text-sm">
+                                            Sign In
+                                        </div>
+                                        <form class="horizontal-form">
+                                            <div class="form-group">
+                                                <input type="email" name="email" class="form-control" placeholder="Email Address" title="Enter your email address">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="password" class="form-control" placeholder="Secret Password" title="Enter your password">
+                                            </div>
+                                            <div class="form-group text-right">
+                                                <button type="button" class="signin btn btn-sm btn-primary">Sign In</button>
+                                            </div>
+                                        </form>
+                                        <br>
+                                    </div>
+
+                                    <div class="signup" style="display:none;">
+                                        <br>
+                                        <div class="text-right text-sm">
+                                            Sign Up
+                                        </div>
+                                        <form class="horizontal-form">
+                                            <div class="form-group">
+                                                <input type="email" name="email" class="form-control" placeholder="Email Address" title="Enter your email address">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="password" class="form-control" placeholder="Secret Password" title="Enter your password">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="confirm" class="form-control" placeholder="Confirm Secret" title="Enter your password again">
+                                            </div>
+                                            <div class="form-group text-right">
+                                                <button type="button" class="signup btn btn-sm btn-primary">Register</button>
+                                            </div>
+                                        </form>
+                                        <br>
+                                    </div>
+
+
+
+                                </small>
+                            </h1>
+
+                            <div class="text-right">
+                                <hr>
+                                <h4>
+                                    <span class="audio-btn pointer pull-left glyphicon glyphicon-pause text-muted"></span>
+                                    <a class="btn signup" href="#Sign Up">Sign Up</a>
+                                    <a class="btn signin" href="#Sign In">Sign In</a>
+                                </h4>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- JQuery 2.2.4 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
         <!-- Data Tables -->
@@ -51,6 +140,9 @@
 
         <!-- Global JS -->
         <script src="./assets/js/global.js"></script>
+
+        <!-- Events JS -->
+        <script src="./assets/js/events.js"></script>
 
     </body>
 </html>

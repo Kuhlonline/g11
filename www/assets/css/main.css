@@ -1,8 +1,85 @@
-html, body {
-    margin: 0px;
-    height: 100%;
-    width: 100%;
-    padding: 0px;
-    top: 0px;
-    left: 0px;
-}
+/** ELEMENTS **/
+
+    html, body {
+        margin: 0px;
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        top: 0px;
+        left: 0px;
+    }
+
+    div, button {
+        border-radius: 0px !important;
+    }
+
+/** END ELEMENTS **/
+
+
+/** PAGE CONTENT **/
+
+    #page {
+        position: fixed;
+
+        top: 0px;
+        height: 100%;
+
+        left: 0px;
+        width: 100%;
+
+        margin: 0px;
+        padding: 0px;
+
+        background-image: url('../img/back_001.jpg');
+        background-size: cover;
+        background-attachment: scroll;
+        background-repeat: no-repeat;
+    }
+
+    .content {
+        height: 100%;
+        width: 100%;
+    }
+
+/** END PAGE CONTENT **/    
+
+
+/** TEXT **/
+
+    .text-white {
+        color: #fff !important;;
+    }
+
+    .text-sm {
+        font-size: 80%;
+    }
+
+    .spaced {
+        letter-spacing: 3px;
+    }
+
+/** END TEXT **/
+
+
+/** BOX **/
+    .box {
+        background-color: rgba(20,20,20,0.75);
+    }
+
+    .tight {
+        padding: 0px;
+    }
+
+    .spaceless {
+        margin: 0px;
+    }
+/** END BOX **/
+
+
+/** EFFECTS **/
+
+    .pointer {
+        cursor: pointer;
+    }
+
+/** END EFFECTS **/

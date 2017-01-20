@@ -96,7 +96,7 @@
                     $payload,
                     true,
                     12,                    
-                    4096
+                    1024
                 );
 
                 return "Started Event generate_world with Id #{$eventId}";
